@@ -64,7 +64,7 @@ class UserTestCase(TestCase):
     
     def test_edit_user_info(self):
         with app.test_client() as client:
-            u = {"user_id"=1, "first_name"="Jane", "last_name" ="Foster", "image_url"=""}
+            u = {"user_id"=="1", "first_name"=="Jane", "last_name"=="Foster", "image_url"==""}
             resp = client.get(f"/users/{user_id}/edit")
             html = resp.get_data(as_text=True)
 

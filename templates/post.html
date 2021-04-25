@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h2 class="text-light text-center p-1 m-1"><b>{{ post.title }}</b></h2>
+            <h5 class="text-light text-center m-1"><i>By {{ post.user.get_full_name() }}</i></h5>
+            <p class="text-light text-center m-1 p-2">{{ post.content }}</p>
+            <a href="/posts/{{ post.id }}/edit" 
+            class="btn btn-info m-3 btn-block">Edit Post</a>
+            <a href="/posts/{{ post.id }}/delete" 
+            class="btn btn-danger m-3 btn-block">Delete Post</a>
+            <a href="/users/{{ post.user_id }}" 
+            class="btn btn-light m-3 btn-block">Cancel</a>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

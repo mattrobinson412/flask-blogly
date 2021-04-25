@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Post - {{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <h2 class="text-light text-center p-1 m-1">Edit Post</h2>
+            <form method="POST">
+                <p class="text-light text-center">Title:    <input name="title" 
+                    value="{{ post.title }}"></p>
+                <p class="text-light text-center">Content:    
+                    <textarea name="content" class="text-center form-control" rows="8"
+                    >{{ post.content }}</textarea>
+                </p>
+                <<a href="/users/{{ post.user_id }}" 
+                    class="btn btn-light m-3 justify-content-center">Cancel</a>
+                <button class="btn-success justify-content-center m-3">Save</button>
+            </form>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

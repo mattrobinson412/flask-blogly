@@ -1,16 +1,18 @@
 """Seed file to make sample data for user db."""
 
-from models import User, db
+from models import User, db, Post
 from app import app
 
 # Create all tables
 db.drop_all()
 db.create_all()
 
-# If table isn't empty, empty it
+# If tables aren't empty, empty them
 User.query.delete()
+Post.query.delete()
 
-# Add pets
+
+# Add users
 feeny = User(first_name='Feeny', 
                 last_name="Josefin", 
                 image_url='https://unsplash.com/photos/ILip77SbmOE')
@@ -21,10 +23,22 @@ kai = User(first_name='Kai',
                 last_name="Montserrat", 
                 image_url='https://unsplash.com/photos/At__EKm5PGE')
 
-# Add new objects to session, so they'll persist
-db.session.add(feeny)
-db.session.add(lenny)
-db.session.add(kai)
-
-# Commit--otherwise, this never gets saved!
+# Add and commit new objects to session, so they'll persist
+db.session.add_all([feeny, lenny, kai])
 db.session.commit()
+
+# add posts
+first_post = Post(title='Cooking Crab Legs Like a Cajun',
+                    content='lorem ipsum fsdfad fsdafsdj fdsfkdsfj. fdsfj fsfdsf sdfdsf dfds.',
+                    user_id=1)
+second_post = Post(title='Marvelous Movies from the 90s.',
+                    content='lorem ipsum fsdfad fsdafsdj fdsfkdsfj. fdsfj fsfdsf sdfdsf dfds.',
+                    user_id=2)
+third_post = Post(title='Remembering Finding Nemo from an Adult Perspective.',
+                    content='lorem ipsum fsdfad fsdafsdj fdsfkdsfj. fdsfj fsfdsf sdfdsf dfds.',
+                    user_id=3)
+
+# Add and commit new objects to session, so they'll persist
+db.session.add_all([first_post, second_post, third_post])
+db.session.commit()
+

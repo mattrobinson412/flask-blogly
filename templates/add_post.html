@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Post for {{ user.get_full_name() }}{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <h3 class="text-light m-3 text-center">Add Post for {{ user.get_full_name() }}</h3>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-md">
+            <form method="POST">
+                <p class="text-light text-center">Title:    <input name="title"></p>
+                <p class="text-light text-center">Content:    
+                    <textarea name="content" class="text-center form-control" rows="8"></textarea>
+                </p>
+                <<a href="/users/{{ user.id }}" 
+                    class="btn btn-light m-3 justify-content-center">Cancel</a>
+                <button class="btn-success justify-content-center m-3">Save</button>
+            </form>
+            
+        </div>
+        <div class="col-sm"></div>
+
+
+        
+    </div>
+
+
+
+</div>
+
+
+
+
+
+
+{% endblock %}
