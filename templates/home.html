@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Blogly{% endblock %}
+
+{% block content %}
+
+<h1 class="text-light p-1 m-3">Blogly Recent Posts</h1>
+{% for post in posts %}
+    <section class="m-2 p-2">
+        <h4 class="text-light m-3">
+            <a href="/posts/{{post.id}}" class="text-light">{{post.title}}</a>
+        </h4>
+        <h6 class="text-light m-3"><i>By {{ post.user.get_full_name() }}</i></h6>
+        <p class="text-light m-3">{{ post.format_date() }}</p>
+        {% for posttag in posttags if posttag in post.posttags %}
+        <a href="/tags/{{posttag.tag_id}}" class="btn btn-success m-3">{{ posttag.tags.name }}</a>
+        {% endfor %}
+    </section>
+    
+{% endfor %}
+
+
+
+
+
+
+
+{% endblock %}

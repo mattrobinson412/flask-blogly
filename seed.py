@@ -1,6 +1,6 @@
 """Seed file to make sample data for user db."""
 
-from models import User, db, Post
+from models import User, db, Post, Tag, PostTag
 from app import app
 
 # Create all tables
@@ -10,6 +10,8 @@ db.create_all()
 # If tables aren't empty, empty them
 User.query.delete()
 Post.query.delete()
+Tag.query.delete()
+PostTag.query.delete()
 
 
 # Add users
@@ -42,3 +44,20 @@ third_post = Post(title='Remembering Finding Nemo from an Adult Perspective.',
 db.session.add_all([first_post, second_post, third_post])
 db.session.commit()
 
+# add tags
+tag = Tag(name='Literature')
+tags = Tag(name='Poetry')
+tagged = Tag(name='Satire')
+
+# Add and commit new objects to session, so they'll persist
+db.session.add_all([tag, tags, tagged])
+db.session.commit()
+
+# add post tags
+tag = PostTag(post_id='1', tag_id='1')
+tags = PostTag(post_id='2', tag_id='2')
+tagged = PostTag(post_id='3', tag_id='3')
+
+# Add and commit new objects to session, so they'll persist
+db.session.add_all([tag, tags, tagged])
+db.session.commit()

@@ -16,6 +16,19 @@
                     <textarea name="content" class="text-center form-control" rows="8"
                     >{{ post.content }}</textarea>
                 </p>
+                <p class="text-light m-3 text-center">{{ post.format_date() }}</p>
+                {% for posttag in posttags if posttag in post.posttags %}
+                    <a href="/tags/{{posttag.tag_id}}" class="btn btn-success m-3">
+                        {{ posttag.tags.name }}</a>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="tags" class="text-light">Avalailable Tags</label>
+                    <select multiple class="form-control" name="tags">
+                        {% for tag in tags %}
+                      <option>{{ tag.name }}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
                 <<a href="/users/{{ post.user_id }}" 
                     class="btn btn-light m-3 justify-content-center">Cancel</a>
                 <button class="btn-success justify-content-center m-3">Save</button>

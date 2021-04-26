@@ -18,6 +18,14 @@
                 <<a href="/users/{{ user.id }}" 
                     class="btn btn-light m-3 justify-content-center">Cancel</a>
                 <button class="btn-success justify-content-center m-3">Save</button>
+                <div class="form-group">
+                    <label for="tags" class="text-light">Available Tags</label>
+                    <select multiple class="form-control" name="tags">
+                        {% for tag in tags %}
+                        <option>{{ tag.name }}</option>
+                        {% endfor %}
+                    </select>
+                  </div>
             </form>
             
         </div>

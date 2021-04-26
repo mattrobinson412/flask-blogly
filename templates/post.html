@@ -11,6 +11,11 @@
             <h2 class="text-light text-center p-1 m-1"><b>{{ post.title }}</b></h2>
             <h5 class="text-light text-center m-1"><i>By {{ post.user.get_full_name() }}</i></h5>
             <p class="text-light text-center m-1 p-2">{{ post.content }}</p>
+            <p class="text-light m-3 text-center">{{ post.format_date() }}</p>
+            {% for posttag in posttags if posttag in post.posttags %}
+                <a href="/tags/{{posttag.tag_id}}" class="btn btn-success m-3">{{ posttag.tags.name }}</a>
+            {% endfor %}
+
             <a href="/posts/{{ post.id }}/edit" 
             class="btn btn-info m-3 btn-block">Edit Post</a>
             <a href="/posts/{{ post.id }}/delete" 

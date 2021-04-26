@@ -28,17 +28,7 @@ class User(db.Model):
     image_url = db.Column(db.String, 
                           nullable=True, 
                           default='https://unsplash.com/photos/fIq0tET6llw')
-    
-    # @validates('first_name')
-    # def validate_first_name(self, key, val):
-    #     assert int not in val
-    #     return val
-    
-    # @validates('last_name')
-    # def validate_last_name(self, key, val):
-    #     assert int not in val
-    #     return val
-    
+
     def __repr__(self):
         """Show info about user."""
 
@@ -83,5 +73,51 @@ class Post(db.Model):
         p = self
         return f"<Post {p.id} {p.title} {p.content} {p.created_at} {p.user_id}>"
     
+    def format_date(self):
+        """Format date nicely for post."""
+
+        p = self
+        date = p.created_at.strftime("%c")
+        return f"{date}"    
+
+class PostTag(db.Model):
+    """Class for tags on a specific post in the Blogly app."""
+
+    __tablename__ = "posttag"
+
+    post_id = db.Column(db.Integer,
+                        db.ForeignKey('post.id'),
+                        primary_key=True,
+                        nullable=False)
+    tag_id = db.Column(db.Integer, 
+                        db.ForeignKey('tag.id'),
+                        primary_key=True,
+                        nullable=False)
+
+    post = db.relationship('Post', backref='posttags')
+    tags = db.relationship('Tag', backref='posttags')
+
+    def __repr__(self):
+        """Show info about post tag."""
+
+        p = self
+        return f"<PostTag {p.post_id} {p.tag_id}>"
 
 
+
+class Tag(db.Model):
+    """Class for tags in the Blogly app."""
+
+    __tablename__ = "tag"
+
+    id = db.Column(db.Integer,
+                        primary_key=True,
+                        autoincrement=True)
+    name = db.Column(db.String, 
+                        nullable=False)
+
+    def __repr__(self):
+        """Show info about tag."""
+
+        t = self
+        return f"<Tag {t.id} {t.name}>"
